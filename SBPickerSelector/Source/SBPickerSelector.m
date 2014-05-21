@@ -227,12 +227,20 @@
     return self.pickerData.count;
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    if (self.numberOfComponents > 1) {
-        NSMutableArray *comp = self.pickerData[component];
-        return comp[row];
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    UILabel *pickerLabel = (UILabel *)view;
+    NSString *text = self.pickerData[row];
+    // Reuse the label if possible, otherwise create and configure a new one
+    if ((pickerLabel == nil) || ([pickerLabel class] != [UILabel class])) { //newlabel
+        CGRect frame = CGRectMake(0.0, 0.0, 320, 16.0);
+        pickerLabel = [[UILabel alloc] initWithFrame:frame];
+        pickerLabel.textAlignment = NSTextAlignmentCenter;
+        pickerLabel.backgroundColor = [UIColor whiteColor];
     }
-    return self.pickerData[row];
+    pickerLabel.textColor = [UIColor blackColor];
+    pickerLabel.font = [UIFont fontWithName:self.pickerData[row] size:14];
+    pickerLabel.text = text;
+    return pickerLabel;
 }
 
 
