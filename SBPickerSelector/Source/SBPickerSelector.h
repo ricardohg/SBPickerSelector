@@ -60,6 +60,7 @@ typedef NS_ENUM(NSInteger, SBPickerSelectorDateType) {
 @property (nonatomic, strong) NSDate *defaultDate;
 @property (nonatomic, strong) NSString *doneButtonTitle;
 @property (nonatomic, strong) NSString *cancelButtonTitle;
+@property (nonatomic, assign) BOOL isFontsView;
 
 
 + (SBPickerSelector *) picker;

@@ -227,6 +227,17 @@
     return self.pickerData.count;
 }
 
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    if (self.isFontsView) {
+        return nil;
+    }
+    if (self.numberOfComponents > 1) {
+        NSMutableArray *comp = self.pickerData[component];
+        return comp[row];
+    }
+    return self.pickerData[row];
+}
+
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel *pickerLabel = (UILabel *)view;
     NSString *text = self.pickerData[row];
@@ -242,7 +253,6 @@
     pickerLabel.text = text;
     return pickerLabel;
 }
-
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     if (self.pickerType == SBPickerSelectorTypeDate) {
